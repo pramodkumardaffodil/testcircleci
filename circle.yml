@@ -1,0 +1,16 @@
+test:
+  override:
+    - phpunit tests # use PHPunit for testing
+deployment:
+  staging:
+    branch: master
+    codedeploy:
+      Demo:
+        application_root: /
+        region: us-west-2
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: code-deploy-test-run
+            key_pattern: testcircleci-{BRANCH}-{SHORT_COMMIT}
+        deployment_group: Circleci
